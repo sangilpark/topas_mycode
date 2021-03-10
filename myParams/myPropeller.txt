@@ -1,0 +1,86 @@
+# my first geometry
+
+#### World ####
+s:Ge/World/Type	    = "TsBox"
+s:Ge/World/Material = "Vacuum"
+#s:Ge/World/Material = "Air"
+d:Ge/World/HLX = 1. m
+d:Ge/World/HLY = 1. m
+d:Ge/World/HLZ = 2. m
+#d:Ge/World/TransX = 0. m
+#d:Ge/World/TransY = 0. m
+#d:Ge/World/TransZ = 0. m
+#d:Ge/World/RotX = 0. deg
+#d:Ge/World/RotY = 0. deg
+#d:Ge/World/RotZ = 0. deg
+
+#### Geometry ####
+s:Ge/MyPropeller/Parent	    =	"World"
+s:Ge/MyPropeller/Type	    =   "MyPropeller"
+#i:Ge/MyPropeller/NbOfBlades = Ge/PropellerConstant/NbBlades
+i:Ge/MyPropeller/NbOfBlades = 4
+d:Ge/MyPropeller/Rin     = 0.1 m
+d:Ge/MyPropeller/Rout     = 0.5 m
+dv:Ge/MyPropeller/Thickness = 4 1 0.01 0.01 0.01 m
+iv:Ge/MyPropeller/Angles = 4 1 1 1 1
+sv:Ge/MyPropeller/Materials = 4 "Water_75ev" "Water_75ev" "Water_75ev" "Water_75ev"
+s:Ge/MyPropeller/Blade/Material = "Water_75ev"
+s:Ge/MyPropeller/Blade/Color = "skyblue"
+b:Ge/QuitIfOverlapDetected = "False"
+
+##s:Ge/MyPropeller/Material   =	"G4_WATER"
+#s:Ge/MyPropeller/Material   =	"Water_75ev"
+#d:Ge/MyPropeller/HLX	    =	0.5 m
+#d:Ge/MyPropeller/HLY 	    = 	0.5 m
+#d:Ge/MyPropeller/HLZ 	    = 	0.5 m
+#d:Ge/MyPropeller/TransX	=	0. m
+#d:Ge/MyPropeller/TransY	= 	0. m
+#d:Ge/MyPropeller/TransZ	= 	0. m
+#d:Ge/MyPropeller/RotX	    =	0. deg
+#d:Ge/MyPropeller/RotY	    = 	0. deg
+#d:Ge/MyPropeller/RotZ	    = 	180. deg
+#i:Ge/MyPropeller/XBins    = 1
+#i:Ge/MyPropeller/YBins    = 1
+#i:Ge/MyPropeller/ZBins    = 100
+
+#### Materials ####
+sv:Ma/Water_75eV/Components = 2 "Hydrogen" "Oxygen"
+uv:Ma/Water_75eV/Fractions = 2 0.111894 0.888106
+d:Ma/Water_75eV/Density = 1.0 g/cm3
+d:Ma/Water_75eV/MeanExcitationEnergy = 75.0 eV
+s:Ma/Water_75eV/DefaultColor = "blue"
+b:Ma/Water_75eV/EnableOpticalProperties = "True"
+#i:Ma/Verbosity = 1
+
+#### Graphic ####
+s:Gr/MyView/Type = "OpenGL"
+b:Gr/MyView/IncludeAxes = "True" # defaults to "False"
+#s:Gr/MyView/AxesComponent = "World" # Component in which to center the axes. Defaults to World.
+#d:Gr/MyView/AxesSize = 0.3 m # size of axes
+d:Gr/MyView/Theta = 45. deg # view angle as in /vis/viewer/set/viewpointThetaPhi
+d:Gr/MyView/Phi = 45. deg # view angle as in /vis/viewer/set/viewpointThetaPhi
+u:Gr/MyView/TransX = 0. # move left or right in the view window
+u:Gr/MyView/TransY = 0. # move up or down in the view window
+s:Gr/MyView/Projection = "Perspective" # Defaults to "Orthogonal"
+d:Gr/MyView/PerspectiveAngle = 10. deg # Increase for stronger perspective effect
+i:Gr/MyView/WindowSizeX = 600
+i:Gr/MyView/WindowSizeY = 600
+i:Gr/MyView/WindowPosX = 0
+i:Gr/MyView/WindowPosY = 0
+b:Gr/MyView/HiddenLineRemovalForGeometry = "False" # Remove hidden lines from wireframe geometries, like Geant4’s /vis/viewer/set/hiddenEdge
+b:Gr/MyView/HiddenLineRemovalForTrajectories = "False" # Remove hidden trajectories lines from within geometries, like Geant4’s /vis/viewer/set/hiddenMarker
+s:Gr/MyView/ColorBy = "Charge" # "Charge", "ParticleType", "OriginComponent", "Energy", "Momentum", "Generation", "CreatorProcess"
+
+
+#### SYSTEM ####
+#b:Ts/PauseBeforeQuit = "True"
+i:Ts/NumberOfThreads = 4 # defaults to 1
+i:Ts/ShowHistoryCountAtInterval = 100 # How often to print history count to the console
+
+#### Time features and etc ####
+#d:Tf/TimelineStart = 0. s # defaults to zero
+#d:Tf/TimelineEnd = 10. s # must be larger than TimelineStart
+#i:Tf/NumberOfSequentialTimes = 100 # defaults to 1
+#i:Tf/Verbosity = 2 # defaults to zero.
+# set to 1 to get time log (NbParticlesInTime.txt)
+# set to 2 to get detailed update messages
