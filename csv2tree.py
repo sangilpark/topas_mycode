@@ -8,7 +8,7 @@ if len(sys.argv) < 2:
 
 dir_path = sys.argv[1]
 csv_files = glob.glob(dir_path+'/*.csv')
-rootfile = TFile(dir_path + "/result.root","recreate")
+rootfile = TFile(dir_path + "/result_Tree.root","recreate")
 tree = {}
 for i, f in enumerate(csv_files):
     tree_name = f.split('/')[-1].replace('.csv','')

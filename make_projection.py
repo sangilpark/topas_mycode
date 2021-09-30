@@ -4,13 +4,14 @@ import numpy as np
 
 gStyle.SetOptStat(0)
 #gStyle.SetCanvasPreferGL(1)
+
 dir_path = sys.argv[1]
 
-#fin = TFile(dir_path+'/histograms.root')
-#fout = TFile(dir_path+'/2d_projection.root','recreate')
+fin = TFile(dir_path+'/histograms_3D.root')
+fout = TFile(dir_path+'/histograms_2D.root','recreate')
 
-fin = TFile(dir_path+'/RBE.root')
-fout = TFile(dir_path+'/RBE_2d_projection.root','recreate')
+#fin = TFile(dir_path+'/RBE.root')
+#fout = TFile(dir_path+'/RBE_2d_projection.root','recreate')
 
 nkeys = fin.GetNkeys()
 keys = fin.GetListOfKeys()
@@ -25,7 +26,6 @@ for idx, key in enumerate(keys):
     nybins = h3.GetNbinsY()
     nzbins = h3.GetNbinsZ()
     
-
     # x-y slice
     for zbin in range(nzbins):
         h3_xy = h3.Clone()
