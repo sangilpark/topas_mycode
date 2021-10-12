@@ -1,0 +1,260 @@
+# Demonstrates use of a DICOM file.
+# You must unzip Abdomen.zip before you run this example.
+# Reads in and displays a 3 slice scan of an abdomen.
+# The display writes very slowly to the screen.
+# This will be improved in an upcoming new release.
+# Until then, one useful trick is that if you iconize the graphics window,
+# then un-inconize it when drawing is done, the drawing will go much faster.
+
+# This example has three blocks of component definition to mimic beam delivery to a patient in a treatment room.
+
+# 1. Coordination definition
+# 2. Plan information: Gantry angle, couch angle, Plan Isocenter
+# 2. DICOM Patient:
+# 3. Beam setup
+# 4. Dosegrid setup
+
+includeFile = HUtoMaterialSchneider.topas
+includeFile = CellLineV79.topas
+
+###################################################
+# Coordination
+###################################################
+# World: Fixed coordination in IEC
+s:Ge/World/Material  = "G4_AIR"
+d:Ge/World/HLX       = 1.0 m
+d:Ge/World/HLY       = 1.0 m
+d:Ge/World/HLZ       = 1.0 m
+#b:Ge/World/Invisible = "T"
+
+# IEC_G: Gantry
+s:Ge/IEC_G/Parent  = "World"
+s:Ge/IEC_G/Type    = "Group"
+d:Ge/IEC_G/RotX    = 0. deg
+d:Ge/IEC_G/RotY    = -1.0 * Ge/Gantry_Angle deg
+#d:Ge/IEC_G/RotY    = 0. deg
+d:Ge/IEC_G/RotZ    = 0. deg
+d:Ge/IEC_G/TransX  = 0. m
+d:Ge/IEC_G/TransY  = 0. m
+d:Ge/IEC_G/TransZ  = 0. m
+
+# IEC_S: Patient support
+s:Ge/IEC_S/Parent  = "World"
+s:Ge/IEC_S/Type    = "Group"
+d:Ge/IEC_S/RotX    = 0. deg
+d:Ge/IEC_S/RotY    = 0. deg
+d:Ge/IEC_S/RotZ    = Ge/Couch_Angle deg
+#d:Ge/IEC_S/RotZ    = 0. deg
+d:Ge/IEC_S/TransX  = 0. m
+d:Ge/IEC_S/TransY  = 0. m
+d:Ge/IEC_S/TransZ  = 0. m
+
+# DICOM_to_IEC
+s:Ge/DICOM_to_IEC/Type   = "Group"
+s:Ge/DICOM_to_IEC/Parent = "IEC_S"
+d:Ge/DICOM_to_IEC/TransX = 0 mm
+d:Ge/DICOM_to_IEC/TransY = 0 mm
+d:Ge/DICOM_to_IEC/TransZ = 0 mm
+d:Ge/DICOM_to_IEC/RotX   = 0.0	deg
+d:Ge/DICOM_to_IEC/RotY   = 0.0  deg
+d:Ge/DICOM_to_IEC/RotZ   = 0.0  deg
+
+####################################################
+# Geometry parameters from plan
+####################################################
+#for plan
+d:Ge/Gantry_Angle = 90.0 deg
+d:Ge/Couch_Angle  = 180 deg
+
+#Geant4: Abdomen CT's isocenter
+#d:Ge/IsoCenterX   = 0 mm
+#d:Ge/IsoCenterY   = 0 mm
+#d:Ge/IsoCenterZ   = 0 mm
+d:Ge/IsoCenterX   = 0 mm
+d:Ge/IsoCenterY   = -192 mm
+d:Ge/IsoCenterZ   = 878.5 mm
+
+#b:Ge/QuitIfOverlapDetected = "False"
+
+#Beam is on Gantry coordination
+Ge/BeamPosition/Parent = "IEC_G"
+Ge/BeamPosition/TransZ = 45.0 cm
+
+###################################################
+#  Patient in DICOM
+####################################################
+
+s:Ge/Patient/Parent   = "DICOM_to_IEC"
+s:Ge/Patient/Type     = "TsDicomPatient"
+s:Ge/Patient/Material = "G4_WATER"
+d:Ge/Patient/RotX     = 0.0 deg
+d:Ge/Patient/RotY     = 0.0 deg
+d:Ge/Patient/RotZ     = 0.0 deg
+s:Ge/Patient/HUtoMaterialConversionMethod = "Schneider"
+
+# Transient parametes
+# DicomOrigin: a vector to CT cube's center
+# note: patient positioning is properly done when the simulation starts
+dc:Ge/Patient/DicomOriginX  = 0.0 mm
+dc:Ge/Patient/DicomOriginY  = 0.0 mm
+dc:Ge/Patient/DicomOriginZ  = 0.0 mm
+
+d:Ge/Patient/TransX   = Ge/Patient/DicomOriginX - Ge/IsoCenterX mm
+d:Ge/Patient/TransY   = Ge/Patient/DicomOriginY - Ge/IsoCenterY mm
+d:Ge/Patient/TransZ   = Ge/Patient/DicomOriginZ - Ge/IsoCenterZ mm
+
+#s:Ge/Patient/DicomDirectory      = "Abdomen"
+#s:Ge/Patient/DicomDirectory      = "synthetic_lung/lung-1"
+#s:Ge/Patient/DicomDirectory      = "synthetic_lung/lung-2"
+#s:Ge/Patient/DicomDirectory      = "synthetic_lung/lung-3"
+s:Ge/Patient/DicomDirectory      = "../RandoPhantom"
+
+b:Ge/Patient/ShowSliceSeparations = "True"
+#sv:Ge/Patient/ColorByRTStructNames = 2 "R_LUNG" "L_LUNG"
+#sv:Ge/Patient/ColorByRTStructColors = 2 "yellow" "red"
+
+i:Ge/Patient/RestrictVoxelsXMin = 1
+i:Ge/Patient/RestrictVoxelsXMax = 512
+i:Ge/Patient/RestrictVoxelsYMin = 1
+i:Ge/Patient/RestrictVoxelsYMax = 512
+i:Ge/Patient/RestrictVoxelsZMin = 250
+i:Ge/Patient/RestrictVoxelsZMax = 328
+
+# Create a parallel grid for scroing. "Patient/RTDoseGrid"
+# you have three options to create RTDoseGrid
+# option 1 : You can create  same size from DICOM-RT Dose
+#s:Ge/Patient/CloneRTDoseGridFrom = Ge/Patient/DicomDirectory + "/rtdose.dcm"
+
+# option 2 : You can redefine size from DICOM-RT Dose but keep same position
+#s:Ge/Patient/CloneRTDoseGridFrom = Ge/Patient/DicomDirectory + "/rtdose.dcm"
+#dv:Ge/Patient/CloneRTDoseGridSize = 3 5 5 8 mm
+
+# option 3 : If you don't have RT-Dose, simply specify the pixel size.
+#dv:Ge/Patient/CloneRTDoseGridSize = 3 5 5 5 mm
+
+b:Ge/Patient/IgnoreInconsistentFrameOfReferenceUID = "True"
+
+sv:Ge/Patient/DicomModalityTags = 1 "CT"
+
+# Specify which slices to show.
+# Comment this out or set to zero to show all slices.
+# Set to -1 to show only center slice.
+# Set to -2 to show first, center and last slice.
+#iv:Ge/Patient/ShowSpecificSlicesX = 1 -1
+iv:Ge/Patient/ShowSpecificSlicesY = 1 -1
+#iv:Ge/Patient/ShowSpecificSlicesZ = 1 -1
+
+# Create a parallel custom grid for scroing.
+s:Ge/CustomDoseGrid/Parent     = "Patient"
+s:Ge/CustomDoseGrid/Type       = "TsBox"
+b:Ge/CustomDoseGrid/IsParallel = "TRUE"
+d:Ge/CustomDoseGrid/HLX        = 6.0 cm # whatever overall size you want for this scoring box
+d:Ge/CustomDoseGrid/HLY        = 2 mm
+d:Ge/CustomDoseGrid/HLZ        = 2 mm
+s:Ge/CustomDoseGrid/Color      = "green"
+i:Ge/CustomDoseGrid/XBins      = 120 # however many voxels you want in your parallel scoring box
+#i:Ge/CustomDoseGrid/YBins      = 50
+#i:Ge/CustomDoseGrid/ZBins      = 50
+
+s:Ge/RotatedGroup/Type = "Group"
+s:Ge/RotatedGroup/Parent = "World"
+d:Ge/RotatedGroup/RotY = 180. deg
+
+
+###################################################
+##----  Beam setup   ----#
+####################################################
+s:So/Example/Type                            = "PhaseSpace"
+s:So/Example/PhaseSpaceFileName              = "PhaseSpace_bin"
+s:So/Example/Component                       = "IEC_G"
+i:So/Example/PhaseSpaceMultipleUse          = 0
+#i:So/Example/PhaseSpaceBufferSize           = 100
+#b:So/Example/PhaseSpaceIncludeEmptyHistories = "True"
+i:So/Example/NumberOfHistoriesInRun   = 20
+
+##-- source
+#s:So/Disk/Type                     = "Beam"
+#s:So/Disk/Component                = "BeamPosition"
+#s:So/Disk/BeamParticle             = "proton"
+##d:So/Disk/BeamEnergy               = 100 MeV
+#d:So/Disk/BeamEnergy		   = Tf/BeamEnergy/Value MeV
+#s:So/Disk/BeamShape                = "Ellipse"
+#d:So/Disk/BeamPositionCutoffX      = 5. mm
+#d:So/Disk/BeamPositionCutoffY      = 5. mm
+#s:So/Disk/BeamPositionCutoffShape  = "Ellipse"
+#s:So/Disk/BeamPositionDistribution = "Flat"
+#u:So/Disk/BeamEnergySpread         = 0
+#s:So/Disk/BeamAngularDistribution  = "None"
+#d:So/Disk/BeamAngularSpreadX       = 0 rad
+#d:So/Disk/BeamAngularSpreadY       = 0 rad
+#i:So/Disk/NumberOfHistoriesInRun   = 1000
+##i:So/Disk/NumberOfHistoriesInRun   = 20
+
+#s:So/Example/Type                     = "Beam"
+#s:So/Example/Component                = "BeamPosition"
+#s:So/Example/BeamParticle             = "proton"
+#d:So/Example/BeamEnergy               = 100.23 MeV
+#u:So/Example/BeamEnergySpread         = 0.757504
+#s:So/Example/BeamPositionDistribution = "Gaussian"
+#s:So/Example/BeamPositionCutoffShape  = "Ellipse"
+#d:So/Example/BeamPositionCutoffX      = 1. cm
+#d:So/Example/BeamPositionCutoffY      = 1. cm
+#d:So/Example/BeamPositionSpreadX      = 0.2 cm
+#d:So/Example/BeamPositionSpreadY      = 0.2 cm
+#s:So/Example/BeamAngularDistribution  = "Gaussian"
+#d:So/Example/BeamAngularCutoffX       = 90. deg
+#d:So/Example/BeamAngularCutoffY       = 90. deg
+#d:So/Example/BeamAngularSpreadX       = 0.0032 rad
+#d:So/Example/BeamAngularSpreadY       = 0.0032 rad
+#i:So/Example/NumberOfHistoriesInRun   = 10000
+
+#########
+# Score #
+#########
+s:Sc/EnergyDeposit/Quantity		= "EnergyDeposit"
+s:Sc/EnergyDeposit/Component		= "CustomDoseGrid"
+#b:Sc/EnergyDeposit/PropagateToChildren	= “True”
+s:Sc/EnergyDeposit/IfOutputFileAlreadyExists   = "Overwrite"
+s:Sc/EnergyDeposit/OutputType		= “csv” # root, csv or XML
+s:Sc/EnergyDeposit/OutputFile		= “results/" + Sc/EnergyDeposit/Quantity
+
+s:Sc/DoseToMedium/Quantity                  = "DoseToMedium"
+s:Sc/DoseToMedium/Component                 = "CustomDoseGrid"
+b:Sc/DoseToMedium/OutputToConsole           = "F"
+s:Sc/DoseToMedium/IfOutputFileAlreadyExists = "Overwrite"
+s:Sc/DoseToMedium/OutputType                = "csv"
+s:Sc/DoseToMedium/OutputFile                = "results/" + Sc/DoseToMedium/Quantity
+
+s:Sc/ProtonLET/Quantity			    = "ProtonLET"
+s:Sc/ProtonLET/Component		    = "CustomDoseGrid"
+s:Sc/ProtonLET/IfOutputFileAlreadyExists    = "Overwrite"
+s:Sc/ProtonLET/OutputType		    = "csv"
+s:Sc/ProtonLET/OutputFile 		    = "results/" + Sc/ProtonLET/Quantity
+
+
+###################################################
+# Visualization
+####################################################
+
+s:Gr/ViewA/Type        = "OpenGL"
+i:Gr/ViewA/WindowSizeX = 900
+i:Gr/ViewA/WindowSizeY = 900
+d:Gr/ViewA/Theta       = 265 deg
+d:Gr/ViewA/Phi         = -90 deg
+i:Gr/ShowOnlyOutlineIfVoxelCountExceeds = 2147483647
+
+
+#s:Gr/ViewA/AxesComponent  = "World"
+#s:Gr/ViewA/CenterOn	  = “World”
+s:Gr/ViewA/AxesComponent  = "Patient"
+#s:Gr/ViewA/CenterOn	  = “Patient”
+#b:Gr/ViewA/IncludeAxes    = "true"
+d:Gr/ViewA/AxesSize       = 30.0 cm
+u:Gr/ViewA/Zoom           = 1.5
+
+s:Gr/ViewA/Projection       = "Orthogonal"
+#s:Gr/ViewA/Projection       = "Perspective"
+#d:Gr/ViewA/PerspectiveAngle = 10 deg
+
+i:Ts/ShowHistoryCountAtInterval = 1000
+#i:Ts/NumberOfThreads = -1
