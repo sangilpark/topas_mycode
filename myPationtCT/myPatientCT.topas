@@ -15,7 +15,7 @@
 # 4. Dosegrid setup
 
 includeFile = HUtoMaterialSchneider.topas
-includeFile = CellLineV79.topas
+#includeFile = CellLineV79.topas
 
 ###################################################
 # Coordination
@@ -31,7 +31,7 @@ d:Ge/World/HLZ       = 1.0 m
 s:Ge/IEC_G/Parent  = "World"
 s:Ge/IEC_G/Type    = "Group"
 d:Ge/IEC_G/RotX    = 0. deg
-d:Ge/IEC_G/RotY    = -1.0 * Ge/Gantry_Angle deg
+d:Ge/IEC_G/RotY    = 1.0 * Ge/Gantry_Angle deg
 #d:Ge/IEC_G/RotY    = 0. deg
 d:Ge/IEC_G/RotZ    = 0. deg
 d:Ge/IEC_G/TransX  = 0. m
@@ -148,11 +148,11 @@ iv:Ge/Patient/ShowSpecificSlicesY = 1 -1
 s:Ge/CustomDoseGrid/Parent     = "Patient"
 s:Ge/CustomDoseGrid/Type       = "TsBox"
 b:Ge/CustomDoseGrid/IsParallel = "TRUE"
-d:Ge/CustomDoseGrid/HLX        = 6.0 cm # whatever overall size you want for this scoring box
+d:Ge/CustomDoseGrid/HLX        = 7.0 cm # whatever overall size you want for this scoring box
 d:Ge/CustomDoseGrid/HLY        = 2 mm
 d:Ge/CustomDoseGrid/HLZ        = 2 mm
 s:Ge/CustomDoseGrid/Color      = "green"
-i:Ge/CustomDoseGrid/XBins      = 120 # however many voxels you want in your parallel scoring box
+i:Ge/CustomDoseGrid/XBins      = 140 # however many voxels you want in your parallel scoring box
 #i:Ge/CustomDoseGrid/YBins      = 50
 #i:Ge/CustomDoseGrid/ZBins      = 50
 
