@@ -15,7 +15,6 @@
 # 4. Dosegrid setup
 
 includeFile = HUtoMaterialSchneider.topas
-#includeFile = CellLineV79.topas
 
 ###################################################
 # Coordination
@@ -72,7 +71,7 @@ d:Ge/Couch_Angle  = 180 deg
 #d:Ge/IsoCenterZ   = 0 mm
 d:Ge/IsoCenterX   = 0 mm
 d:Ge/IsoCenterY   = -192 mm
-d:Ge/IsoCenterZ   = 878.5 mm
+d:Ge/IsoCenterZ   = 505 mm
 
 #b:Ge/QuitIfOverlapDetected = "False"
 
@@ -117,7 +116,9 @@ i:Ge/Patient/RestrictVoxelsXMin = 1
 i:Ge/Patient/RestrictVoxelsXMax = 512
 i:Ge/Patient/RestrictVoxelsYMin = 1
 i:Ge/Patient/RestrictVoxelsYMax = 512
-i:Ge/Patient/RestrictVoxelsZMin = 250
+#i:Ge/Patient/RestrictVoxelsZMin = 250
+#i:Ge/Patient/RestrictVoxelsZMax = 328
+i:Ge/Patient/RestrictVoxelsZMin = 1
 i:Ge/Patient/RestrictVoxelsZMax = 328
 
 # Create a parallel grid for scroing. "Patient/RTDoseGrid"
@@ -148,11 +149,11 @@ iv:Ge/Patient/ShowSpecificSlicesY = 1 -1
 s:Ge/CustomDoseGrid/Parent     = "Patient"
 s:Ge/CustomDoseGrid/Type       = "TsBox"
 b:Ge/CustomDoseGrid/IsParallel = "TRUE"
-d:Ge/CustomDoseGrid/HLX        = 7.0 cm # whatever overall size you want for this scoring box
-d:Ge/CustomDoseGrid/HLY        = 2 mm
-d:Ge/CustomDoseGrid/HLZ        = 2 mm
-s:Ge/CustomDoseGrid/Color      = "green"
-i:Ge/CustomDoseGrid/XBins      = 140 # however many voxels you want in your parallel scoring box
+d:Ge/CustomDoseGrid/HLX        = 15.0 cm # whatever overall size you want for this scoring box
+d:Ge/CustomDoseGrid/HLY        = 25 mm
+d:Ge/CustomDoseGrid/HLZ        = 25 mm
+s:Ge/CustomDoseGrid/Color      = "red"
+i:Ge/CustomDoseGrid/XBins      = 150 # however many voxels you want in your parallel scoring box
 #i:Ge/CustomDoseGrid/YBins      = 50
 #i:Ge/CustomDoseGrid/ZBins      = 50
 
@@ -167,10 +168,9 @@ d:Ge/RotatedGroup/RotY = 180. deg
 s:So/Example/Type                            = "PhaseSpace"
 s:So/Example/PhaseSpaceFileName              = "PhaseSpace_bin"
 s:So/Example/Component                       = "IEC_G"
-i:So/Example/PhaseSpaceMultipleUse          = 0
+#i:So/Example/PhaseSpaceMultipleUse          = 2
 #i:So/Example/PhaseSpaceBufferSize           = 100
 #b:So/Example/PhaseSpaceIncludeEmptyHistories = "True"
-i:So/Example/NumberOfHistoriesInRun   = 20
 
 ##-- source
 #s:So/Disk/Type                     = "Beam"
@@ -257,4 +257,4 @@ s:Gr/ViewA/Projection       = "Orthogonal"
 #d:Gr/ViewA/PerspectiveAngle = 10 deg
 
 i:Ts/ShowHistoryCountAtInterval = 1000
-#i:Ts/NumberOfThreads = -1
+i:Ts/NumberOfThreads = -1
