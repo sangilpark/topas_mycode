@@ -1,0 +1,180 @@
+# my extension exercise
+
+#### World ####
+s:Ge/World/Type	    = "TsBox"
+#s:Ge/World/Material = "Vacuum"
+s:Ge/World/Material = "Air"
+d:Ge/World/HLX = 1. m
+d:Ge/World/HLY = 1. m
+d:Ge/World/HLZ = 1. m
+#d:Ge/World/TransX = 0. m
+#d:Ge/World/TransY = 0. m
+#d:Ge/World/TransZ = 0. m
+#d:Ge/World/RotX = 0. deg
+#d:Ge/World/RotY = 0. deg
+#d:Ge/World/RotZ = 0. deg
+
+#### Geometry ####
+s:Ge/MyBox/Parent	    =	"World"
+s:Ge/MyBox/Type	    =   "TsBox"
+#s:Ge/MyBox/Type	    =   "MyBox"
+#s:Ge/MyBox/Material   =	"G4_WATER"
+s:Ge/MyBox/Material   =	"Water_75ev"
+d:Ge/MyBox/HLX	    =	0.5 m
+d:Ge/MyBox/HLY 	    = 	0.5 m
+d:Ge/MyBox/HLZ 	    = 	0.5 m
+d:Ge/MyBox/TransX	=	0. m
+d:Ge/MyBox/TransY	= 	0. m
+d:Ge/MyBox/TransZ	= 	0. m
+d:Ge/MyBox/RotX	    =	180. deg
+#d:Ge/MyBox/RotY	    = 	0. deg
+#d:Ge/MyBox/RotZ	    = 	180. deg
+i:Ge/MyBox/XBins    = 1
+i:Ge/MyBox/YBins    = 1
+#i:Ge/MyBox/ZBins    = 1
+i:Ge/MyBox/ZBins    = 1000
+
+#### Materials ####
+sv:Ma/Water_75eV/Components = 2 "Hydrogen" "Oxygen"
+uv:Ma/Water_75eV/Fractions = 2 0.111894 0.888106
+d:Ma/Water_75eV/Density = 1.0 g/cm3
+d:Ma/Water_75eV/MeanExcitationEnergy = 75.0 eV
+s:Ma/Water_75eV/DefaultColor = "blue"
+b:Ma/Water_75eV/EnableOpticalProperties = "True"
+#i:Ma/Verbosity = 1
+
+#### Beam position ####
+s:Ge/BeamPosition/Parent = "World"
+s:Ge/BeamPosition/Type = "Group"
+d:Ge/BeamPosition/TransX = 0. m
+d:Ge/BeamPosition/TransY = 0. m
+d:Ge/BeamPosition/TransZ = Ge/World/HLZ m
+#d:Ge/BeamPosition/RotX = 0. deg
+#d:Ge/BeamPosition/RotY = 0. deg
+#d:Ge/BeamPosition/RotZ = 180. deg
+
+#### Source ####
+s:So/MySource/Type = "Beam" # Beam, Isotropic, Emittance or PhaseSpace
+s:So/MySource/Component = "BeamPosition"
+s:So/MySource/BeamParticle = "proton"
+d:So/MySource/BeamEnergy = 230 MeV
+##u:So/MySource/BeamEnergySpread = 0.757504
+u:So/MySource/BeamEnergySpread = 0
+s:So/MySource/BeamPositionDistribution = "None" # None, Flat or Gaussian
+#s:So/MySource/BeamPositionCutoffShape = "Point" # Point, Ellipse, Rectangle or Isotropic. Rectangle or Ellipse (if Flat or Gaussian)
+#d:So/MySource/BeamPositionCutoffX = 10. cm
+#d:So/MySource/BeamPositionCutoffY = 10. cm
+#d:So/MySource/BeamPositionSpreadX = 0.65 cm
+#d:So/MySource/BeamPositionSpreadY = 0.65 cm
+s:So/MySource/BeamAngularDistribution = "None" # None, Flat or Gaussian
+#d:So/MySource/BeamAngularCutoffX = 90. deg
+#d:So/MySource/BeamAngularCutoffY = 90. deg
+#d:So/MySource/BeamAngularSpreadX = 0.0032 rad
+#d:So/MySource/BeamAngularSpreadY = 0.0032 rad
+i:So/MySource/NumberOfHistoriesInRun = 1000
+i:So/MySource/NumberOfHistoriesInRandomJob = 0
+
+#### PHYSICS ####
+#s:Ph/Default/Type = "QGSP_BERT_HP"
+#sv:Ph/Default/Modules = 1 "Transportation_Only"
+sv:Ph/Default/Modules = 1 “g4em-standard_opt0”
+#sv:Ph/Default/Modules = 2 “g4em-standard_opt0” "g4optical"
+#d:Ph/Default/CutForAllParticles = 0.05 mm # single range cut to use for all particles
+#d:Ph/Default/CutForGamma = 0.05 mm # overrides CutForAllParticles for Gamma
+#d:Ph/Default/CutForElectron = 0.05 mm # overrides CutForAllParticles for Electron
+#d:Ph/Default/CutForPositron = 0.05 mm # overrides CutForAllParticles for Positron
+#d:Ph/Default/CutForProton = 0.05 mm # overrides CutForAllParticles for Proton
+#d:Ph/Default/CutForAlpha = 0.05 mm # overrides CutForAllParticles for Alpha
+#d:Ph/Default/CutForDeuteron = 0.05 mm # overrides CutForAllParticles for Deuteron
+#d:Ph/Default/CutForTriton = 0.05 mm # overrides CutForAllParticles for Triton
+d:Ph/Default/EMRangeMin = 100. eV # minimum for EM tables
+d:Ph/Default/EMRangeMax = 500. MeV # maximum for EM tables
+#i:Ph/Default/EMBins = 77 # number of bins for EM tables
+#i:Ph/Default/EMBinsPerDecade = 7 # number of bins per decade for EM tables
+#b:Ph/Default/Fluorescence = "False" # Set to true to turn on Fluorescence
+#b:Ph/Default/Auger = "False" # Set to true to turn on Auger
+#b:Ph/Default/AugerCascade = "False" # Set to true to turn on AugerCascade
+#b:Ph/Default/DeexcitationIgnoreCut = "False" # Set to true to implement DeexcitationIgnoreCut
+#b:Ph/Default/PIXE = "False" # Set to true to turn on PIXE
+
+# Energy Deposit
+s:Sc/myEDepScore/Quantity = "EnergyDeposit"
+#s:Sc/myEDepScore/Quantity = "OpticalPhotonCount"
+#s:Sc/myEDepScore/Material = "Water_75eV"
+s:Sc/myEDepScore/Component = "MyBox"
+#b:Sc/myEDepScore/PropagateToChildren = “True”
+#s:Sc/myEDepScore/OutputType = “root” # root, csv or XML
+s:Sc/myEDepScore/OutputFile = “EDep”
+s:Sc/myEDepScore/IfOutputFileAlreadyExists   = "Overwrite"
+#i:Sc/myEDepScore/HistogramBins = 100 # number of bins # Use if OutputType = root
+#d:Sc/myEDepScore/HistogramMin = 0. MeV # with unit appropriate to scored quantity
+#d:Sc/myEDepScore/HistogramMax = 100. MeV # with unit appropriate to scored quantity
+
+# Dose to water
+s:Sc/myDoseToWaterScore/Quantity = "DoseToWater"
+#s:Sc/myDoseToWaterScore/Material = "Water_75eV"
+s:Sc/myDoseToWaterScore/Component = "MyBox"
+#b:Sc/myDoseToWaterScore/PropagateToChildren = “True”
+#s:Sc/myDoseToWaterScore/OutputType = “root” # root, csv or XML
+s:Sc/myDoseToWaterScore/OutputFile = “DoseToWater”
+s:Sc/myDoseToWaterScore/IfOutputFileAlreadyExists   = "Overwrite"
+#i:Sc/myDoseToWaterScore/HistogramBins = 100 # number of bins # Use if OutputType = root
+#d:Sc/myDoseToWaterScore/HistogramMin = 0. MeV # with unit appropriate to scored quantity
+#d:Sc/myDoseToWaterScore/HistogramMax = 100. MeV # with unit appropriate to scored quantity
+
+# Origin count
+s:Sc/nofProton/Quantity = "OriginCount"
+s:Sc/nofProton/Component = "MyBox"
+#sv:Sc/nofProton/OnlyIncludeParticlesNamed = 1 "proton"
+s:Sc/nofProton/IfOutputFileAlreadyExists   = "Overwrite"
+
+#### Scoring ####
+s:Sc/ProtonLET/Quantity = "ProtonLET"
+s:Sc/ProtonLET/WeightBy = "Dose" # defaults to "Dose"
+s:Sc/ProtonLET/Component = "MyBox"
+#d:Sc/ProtonLET/MaxScoredLET = 100 MeV/mm/(g/cm3) # default 100 MeV/mm/(g/cm3)
+b:Sc/ProtonLET/UsePreStepLookup = "True" # defaults to “False”
+#d:Ph/Default/CutForElectron = 1 mm # defaults to 0.05 mm
+#d:Sc/ProtonLET/NeglectSecondariesBelowDensity = 0.1 g/cm3
+#s:Sc/ProtonLET/Surface  = "MyBox/ZPlusSurface"
+#b:Sc/ProtonLET/PropagateToChildren = “True”
+#s:Sc/ProtonLET/OutputType = “root” # root, csv or XML
+#s:Sc/ProtonLET/OutputFile = “myProtonLET”
+s:Sc/ProtonLET/IfOutputFileAlreadyExists   = "Overwrite"
+#i:Sc/ProtonLET/HistogramBins = 1000 # number of bins # Use if OutputType = root
+#d:Sc/ProtonLET/HistogramMin = 0 MeV # with unit appropriate to scored quantity
+#d:Sc/ProtonLET/HistogramMax = 100 MeV # with unit appropriate to scored quantity
+#s:Sc/RootFileName = "output_ProtonLET"
+
+#### Graphic ####
+#s:Gr/MyView/Type = "OpenGL"
+b:Gr/MyView/IncludeAxes = "True" # defaults to "False"
+#s:Gr/MyView/AxesComponent = "World" # Component in which to center the axes. Defaults to World.
+#d:Gr/MyView/AxesSize = 0.3 m # size of axes
+d:Gr/MyView/Theta = 45. deg # view angle as in /vis/viewer/set/viewpointThetaPhi
+d:Gr/MyView/Phi = 45. deg # view angle as in /vis/viewer/set/viewpointThetaPhi
+u:Gr/MyView/TransX = 0. # move left or right in the view window
+u:Gr/MyView/TransY = 0. # move up or down in the view window
+s:Gr/MyView/Projection = "Perspective" # Defaults to "Orthogonal"
+d:Gr/MyView/PerspectiveAngle = 10. deg # Increase for stronger perspective effect
+i:Gr/MyView/WindowSizeX = 600
+i:Gr/MyView/WindowSizeY = 600
+i:Gr/MyView/WindowPosX = 0
+i:Gr/MyView/WindowPosY = 0
+b:Gr/MyView/HiddenLineRemovalForGeometry = "False" # Remove hidden lines from wireframe geometries, like Geant4’s /vis/viewer/set/hiddenEdge
+b:Gr/MyView/HiddenLineRemovalForTrajectories = "False" # Remove hidden trajectories lines from within geometries, like Geant4’s /vis/viewer/set/hiddenMarker
+s:Gr/MyView/ColorBy = "Charge" # "Charge", "ParticleType", "OriginComponent", "Energy", "Momentum", "Generation", "CreatorProcess"
+
+
+#### SYSTEM ####
+#b:Ts/PauseBeforeQuit = "True"
+i:Ts/NumberOfThreads = 4 # defaults to 1
+i:Ts/ShowHistoryCountAtInterval = 1000 # How often to print history count to the console
+
+#### Time features and etc ####
+#d:Tf/TimelineStart = 0. s # defaults to zero
+#d:Tf/TimelineEnd = 10. s # must be larger than TimelineStart
+#i:Tf/NumberOfSequentialTimes = 100 # defaults to 1
+#i:Tf/Verbosity = 2 # defaults to zero.
+# set to 1 to get time log (NbParticlesInTime.txt)
+# set to 2 to get detailed update messages
