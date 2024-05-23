@@ -1,0 +1,71 @@
+#includeFile = BeamSource.txt
+includeFile = RecordPhase.txt
+
+########################################
+# Physics
+########################################
+s:ph/ListName="Default"
+s:Ph/Default/Type="Geant4_Modular"
+sv:Ph/Default/Modules = 6 "g4em-standard_opt4" "g4decay" "g4h-elastic" "g4h-phy_QGSP_BIC_HP" "g4ion-binarycascade" "g4stopping"
+d:Ph/Default/EMRangeMin= 100. eV
+d:Ph/Default/EMRangeMax= 500 MeV
+
+i:Tf/Verbosity = 1
+d:Ph/Default/CutForElectron = 1 cm
+
+########################################
+# World
+########################################
+d:Ge/World/HLX       = 1.0 m
+d:Ge/World/HLY       = 1.0 m
+d:Ge/World/HLZ       = 3.0 m
+#b:Ge/World/Invisible = "TRUE"
+s:Ge/World/Material  = "Air"
+
+########################################
+# Geometry
+########################################
+s:Ge/Phantom/Parent   = "World"
+s:Ge/Phantom/Type     = "TsBox"
+s:Ge/Phantom/Material = "G4_WATER"
+d:Ge/Phantom/HLX      = 150.0 mm
+d:Ge/Phantom/HLY      = 150.0 mm
+d:Ge/Phantom/HLZ      = 150.0 mm
+d:Ge/Phantom/TransX   = 0. m
+d:Ge/Phantom/TransY   = 0. m
+d:Ge/Phantom/TransZ   = 150. mm
+d:Ge/Phantom/RotX     = 0. deg
+d:Ge/Phantom/RotY     = 0. deg
+d:Ge/Phantom/RotZ     = 0. deg
+i:Ge/Phantom/ZBins    = 300
+
+#s:Ge/SCvolume/Parent   = "Phantom"
+#s:Ge/SCvolume/Type     = "TsBox"
+#s:Ge/SCvolume/Material = "G4_WATER"
+#d:Ge/SCvolume/HLX      = 50.0 mm
+#d:Ge/SCvolume/HLY      = 50.0 mm
+#d:Ge/SCvolume/HLZ      = 50.0 mm
+#d:Ge/SCvolume/TransX   = 0. m
+#d:Ge/SCvolume/TransY   = 0. m
+#d:Ge/SCvolume/TransZ   = 0. m
+#d:Ge/SCvolume/RotX     = 0. deg
+#d:Ge/SCvolume/RotY     = 0. deg
+#d:Ge/SCvolume/RotZ     = 0. deg
+#i:Ge/SCvolume/ZBins    = 300
+
+#########################
+# Phase space volume
+#########################
+s:Ge/ZPhaseSpaceVol/Type               = "TsBox"
+s:Ge/ZPhaseSpaceVol/Parent             = "Snout"
+s:Ge/ZPhaseSpaceVol/Material           = "Parent"
+d:Ge/ZPhaseSpaceVol/HLX                = 20. cm
+d:Ge/ZPhaseSpaceVol/HLY                = 20. cm
+d:Ge/ZPhaseSpaceVol/HLZ                =  0.05 mm
+d:Ge/ZPhaseSpaceVol/TransX             = 0. m
+d:Ge/ZPhaseSpaceVol/TransY             = 0. m
+d:Ge/ZPhaseSpaceVol/TransZ             = 0.025 cm + Ge/Aperture/LowerEdge
+#d:Ge/ZPhaseSpaceVol/TransZ             = 20 cm
+d:Ge/ZPhaseSpaceVol/RotX               = 0. deg
+d:Ge/ZPhaseSpaceVol/RotY               = 0. deg
+d:Ge/ZPhaseSpaceVol/RotZ               = 0. deg

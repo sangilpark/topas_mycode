@@ -1,0 +1,5 @@
+b:Gr/MyOGL/IncludeAxes = "True" # defaults to "False"
+s:Gr/MyOGL/AxesComponent = "World" 
+d:Gr/MyOGL/AxesSize = 10. cm # size of axes
+s:Gr/MyOGL/Type        = "OpenGL"
+Ts/UseQt = "True"

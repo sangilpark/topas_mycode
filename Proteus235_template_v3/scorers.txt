@@ -1,0 +1,56 @@
+includeFile = experiment.txt
+
+s:Sc/PhaseSpaceAtVacFilm/Quantity		    = "PhaseSpace"
+b:Sc/PhaseSpaceAtVacFilm/OutputToConsole	    = "True"
+s:Sc/PhaseSpaceAtVacFilm/Surface		    = "ZPhaseSpaceVol/ZMinusSurface"
+s:Sc/PhaseSpaceAtVacFilm/OutputType		    = "ROOT" # ASCII, Binary, Limited or ROOT
+s:Sc/PhaseSpaceAtVacFilm/OutputFile 		    = "PhaseSpace"
+#s:Sc/PhaseSpaceAtVacFilm/OnlyIncludeParticlesGoing  = "In"
+b:Sc/PhaseSpaceAtVacFilm/IncludeTOPASTime            = "True"
+b:Sc/PhaseSpaceAtVacFilm/IncludeTimeOfFlight         = "True"
+b:Sc/PhaseSpaceAtVacFilm/IncludeRunID                = "True"
+b:Sc/PhaseSpaceAtVacFilm/IncludeEventID              = "True"
+b:Sc/PhaseSpaceAtVacFilm/IncludeTrackID              = "True"
+b:Sc/PhaseSpaceAtVacFilm/IncludeParentID             = "True"
+b:Sc/PhaseSpaceAtVacFilm/IncludeVertexInfo           = "True"
+b:Sc/PhaseSpaceAtVacFilm/IncludeSeed                 = "True"
+sv:Sc/PhaseSpaceAtVacFilm/OnlyIncludeParticlesNamed  = 1 "proton"
+s:Sc/PhaseSpaceAtVacFilm/IfOutputFileAlreadyExists  = "Overwrite"
+s:Sc/RootFileName = "results/PhaseSpace"
+
+s:Sc/PhaseSpaceAtVacFilm_binary/Quantity		    = "PhaseSpace"
+b:Sc/PhaseSpaceAtVacFilm_binary/OutputToConsole		    = "True"
+s:Sc/PhaseSpaceAtVacFilm_binary/Surface			    = "ZPhaseSpaceVol/ZMinusSurface"
+s:Sc/PhaseSpaceAtVacFilm_binary/OutputType		    = "Binary" # ASCII, Binary, Limited or ROOT
+s:Sc/PhaseSpaceAtVacFilm_binary/OutputFile 		    = "results/PhaseSpace"
+#s:Sc/PhaseSpaceAtVacFilm_binary/OnlyIncludeParticlesGoing  = "In"
+b:Sc/PhaseSpaceAtVacFilm_binary/IncludeTOPASTime            = "True"
+b:Sc/PhaseSpaceAtVacFilm_binary/IncludeTimeOfFlight         = "True"
+b:Sc/PhaseSpaceAtVacFilm_binary/IncludeRunID                = "True"
+b:Sc/PhaseSpaceAtVacFilm_binary/IncludeEventID              = "True"
+b:Sc/PhaseSpaceAtVacFilm_binary/IncludeTrackID              = "True"
+b:Sc/PhaseSpaceAtVacFilm_binary/IncludeParentID             = "True"
+b:Sc/PhaseSpaceAtVacFilm_binary/IncludeVertexInfo           = "True"
+b:Sc/PhaseSpaceAtVacFilm_binary/IncludeSeed                 = "True"
+sv:Sc/PhaseSpaceAtVacFilm_binary/OnlyIncludeParticlesNamed   = 1 "proton"
+s:Sc/PhaseSpaceAtVacFilm_binary/IfOutputFileAlreadyExists   = "Overwrite"
+
+s:Sc/PhysDose/Quantity   = "DoseToWater"
+s:Sc/PhysDose/Component  = "Phantom"
+b:Sc/PhysDose/PreCalculateStoppingPowerRatios = "True"
+s:Sc/PhysDose/IfOutputFileAlreadyExists = "Overwrite"
+s:Sc/PhysDose/OutputType = "csv"
+s:Sc/PhysDose/OutputFile = "results/DoseToWater"
+
+s:Sc/ProtonLET/Quantity   = "ProtonLET"
+s:Sc/ProtonLET/Component  = "Phantom"
+s:Sc/ProtonLET/IfOutputFileAlreadyExists = "Overwrite"
+s:Sc/ProtonLET/OutputType = "csv"
+s:Sc/ProtonLET/OutputFile = "results/ProtonLET"
+
+s:Sc/EnergyDeposit/Quantity             = "EnergyDeposit"
+s:Sc/EnergyDeposit/Component            = "Phantom"
+#b:Sc/EnergyDeposit/PropagateToChildren	= “True”
+s:Sc/EnergyDeposit/IfOutputFileAlreadyExists   = "Overwrite"
+s:Sc/EnergyDeposit/OutputType           = “csv” # root, csv or XML
+s:Sc/EnergyDeposit/OutputFile           = “results/EnergyDeposit"

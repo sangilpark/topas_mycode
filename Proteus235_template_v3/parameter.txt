@@ -1,0 +1,9 @@
+FS		6
+RM		4
+SS		2
+Option		B5_1
+SD		66
+Energy		162.141648
+OutDirectory	tmp/
+nNodes		0
+nHistory	10
