@@ -45,7 +45,7 @@ def make_input(fs, rm, ss, bcm_opt, stoppos, beam_e, n_history, n_nodes, out_d):
         
         # BeamWeight 값 작성
         outputfile.write("dv:Tf/BeamWeight/Times = 256 ")
-        outputfile.write(" ".join([f"{i*3.921569e-001:.6e}" for i in range(256)]) + "\n")
+        outputfile.write(" ".join([f"{i*3.921569e-001:.6e}" for i in range(256)]) + " ms\n")
         
         outputfile.write("iv:Tf/BeamWeight/Values = 256 ")
         beam_option = calculate_beam_option(bcm_opt)
@@ -106,36 +106,62 @@ def make_input(fs, rm, ss, bcm_opt, stoppos, beam_e, n_history, n_nodes, out_d):
         outputfile.write("d:So/Demo/BeamAngularCutoffY     = 0.01 deg\n")
         outputfile.write("d:So/Demo/BeamAngularSpreadX     = 0.01 deg\n")
         outputfile.write("d:So/Demo/BeamAngularSpreadY     = 0.01 deg\n")
-        outputfile.write("s:Sc/PhaseSpaceAtVacFilm/Quantity = \"PhaseSpace\"\n")
-        outputfile.write("b:Sc/PhaseSpaceAtVacFilm/OutputToConsole = \"True\"\n")
-        outputfile.write("s:Sc/PhaseSpaceAtVacFilm/Surface = \"ZPhaseSpaceVol/ZMinusSurface\"\n")
-        outputfile.write("s:Sc/PhaseSpaceAtVacFilm/OutputType = \"Binary\"\n")
-        outputfile.write("b:Sc/PhaseSpaceAtVacFilm/IncludeTOPASTime = \"False\"\n")
-        outputfile.write("b:Sc/PhaseSpaceAtVacFilm/IncludeTimeOfFlight = \"False\"\n")
-        outputfile.write("b:Sc/PhaseSpaceAtVacFilm/IncludeRunID   = \"False\"\n")
-        outputfile.write("b:Sc/PhaseSpaceAtVacFilm/IncludeEventID = \"False\"\n")
-        outputfile.write("b:Sc/PhaseSpaceAtVacFilm/IncludeTrackID = \"False\"\n")
-        outputfile.write("b:Sc/PhaseSpaceAtVacFilm/IncludeParentID = \"False\"\n")
-        outputfile.write("b:Sc/PhaseSpaceAtVacFilm/IncludeVertexInfo = \"True\"\n")
-        outputfile.write("b:Sc/PhaseSpaceAtVacFilm/IncludeSeed = \"False\"\n")
-        outputfile.write("sv:Sc/PhaseSpaceAtVacFilm/OnlyIncludeParticlesNamed = 2 \"proton\" \"neutron\"\n")
-        outputfile.write("s:Sc/PhaseSpaceAtVacFilm/IfOutputFileAlreadyExists = \"Increment\"\n")
-        outputfile.write(f"s:Sc/PhaseSpaceAtVacFilm/OutputFile = \"{out_d}/Phase\"\n")
-        outputfile.write(f"s:Ge/Aperture/InputFile = \"ApertureFileIn.ap\"\n")
+        
+        #outputfile.write("s:Sc/PhaseSpaceAtVacFilm/Quantity = \"PhaseSpace\"\n")
+        #outputfile.write("b:Sc/PhaseSpaceAtVacFilm/OutputToConsole = \"True\"\n")
+        #outputfile.write("s:Sc/PhaseSpaceAtVacFilm/Surface = \"ZPhaseSpaceVol/ZMinusSurface\"\n")
+        #outputfile.write("s:Sc/PhaseSpaceAtVacFilm/OutputType = \"Binary\"\n")
+        #outputfile.write("b:Sc/PhaseSpaceAtVacFilm/IncludeTOPASTime = \"False\"\n")
+        #outputfile.write("b:Sc/PhaseSpaceAtVacFilm/IncludeTimeOfFlight = \"False\"\n")
+        #outputfile.write("b:Sc/PhaseSpaceAtVacFilm/IncludeRunID   = \"False\"\n")
+        #outputfile.write("b:Sc/PhaseSpaceAtVacFilm/IncludeEventID = \"False\"\n")
+        #outputfile.write("b:Sc/PhaseSpaceAtVacFilm/IncludeTrackID = \"False\"\n")
+        #outputfile.write("b:Sc/PhaseSpaceAtVacFilm/IncludeParentID = \"False\"\n")
+        #outputfile.write("b:Sc/PhaseSpaceAtVacFilm/IncludeVertexInfo = \"True\"\n")
+        #outputfile.write("b:Sc/PhaseSpaceAtVacFilm/IncludeSeed = \"False\"\n")
+        #outputfile.write("sv:Sc/PhaseSpaceAtVacFilm/OnlyIncludeParticlesNamed = 2 \"proton\" \"neutron\"\n")
+        #outputfile.write("s:Sc/PhaseSpaceAtVacFilm/IfOutputFileAlreadyExists = \"Increment\"\n")
+        #outputfile.write(f"s:Sc/PhaseSpaceAtVacFilm/OutputFile = \"{out_d}/Phase\"\n")
+        
+        #outputfile.write(f"s:Ge/Aperture/InputFile = \"ApertureFileIn.ap\"\n")
 
         outputfile.write(f"i:Ts/NumberOfThreads = {n_nodes}\n")
         outputfile.write("b:Ge/QuitIfOverlapDetected = \"F\"\n")
         outputfile.write("i:Ts/MaxInterruptedHistories = 100000000\n")
 
+        print(f"input file is saved as {outputfilename}")
+
 # 함수 호출 예시
 if __name__ == "__main__":
-    make_input("6", # FS
-                "4", # RM
+    #make_input("632", # FS
+    #            "5", # RM
+    #            "3", # SS
+    #            "B6_2", # BCM option
+    #            "55", # stop position
+    #            "195.40", # Energy
+    #            "10", # nHistory
+    #            "-1", # nNodes
+    #            "output_test1",
+    #            )
+    
+    #make_input("9643", # FS
+    #            "6", # RM
+    #            "3", # SS
+    #            "B7_3", # BCM option
+    #            "184", # stop position
+    #            "226.92", # Energy
+    #            "10", # nHistory
+    #            "-1", # nNodes
+    #            "results",
+    #            )
+    
+    make_input("6254", # FS
+                "5", # RM
                 "2", # SS
-                "B5_1", # BCM option
-                "66", # stop position
-                "162.141648", # Energy
+                "B4_1", # BCM option
+                "164", # stop position
+                "171.79", # Energy
                 "10", # nHistory
-                "4", # nNodes
-                "/output",
+                "-1", # nNodes
+                "results",
                 )
