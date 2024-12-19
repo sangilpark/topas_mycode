@@ -1,4 +1,3 @@
-#includeFile = BeamSource.txt
 includeFile = RecordPhase.txt
 
 ########################################
@@ -6,8 +5,8 @@ includeFile = RecordPhase.txt
 ########################################
 s:ph/ListName="Default"
 s:Ph/Default/Type="Geant4_Modular"
-#sv:Ph/Default/Modules = 6 "g4em-standard_opt4" "g4decay" "g4h-elastic" "g4h-phy_QGSP_BIC_HP" "g4ion-binarycascade" "g4stopping"
-sv:Ph/Default/Modules = 6 "g4em-standard_opt4" "g4decay" "g4h-elastic_HP" "g4h-phy_QGSP_BIC_HP" "g4ion-binarycascade" "g4stopping"
+sv:Ph/Default/Modules = 6 "g4em-standard_opt4" "g4decay" "g4h-elastic" "g4h-phy_QGSP_BIC_HP" "g4ion-binarycascade" "g4stopping"
+#sv:Ph/Default/Modules = 6 "g4em-standard_opt4" "g4decay" "g4h-elastic_HP" "g4h-phy_QGSP_BIC_HP" "g4ion-binarycascade" "g4stopping"
 d:Ph/Default/EMRangeMin= 100. eV
 d:Ph/Default/EMRangeMax= 500 MeV
 
@@ -65,8 +64,8 @@ d:Ge/ZPhaseSpaceVol/HLY                = 20. cm
 d:Ge/ZPhaseSpaceVol/HLZ                =  0.05 mm
 d:Ge/ZPhaseSpaceVol/TransX             = 0. m
 d:Ge/ZPhaseSpaceVol/TransY             = 0. m
-d:Ge/ZPhaseSpaceVol/TransZ             = 0.025 cm + Ge/Aperture/LowerEdge
-#d:Ge/ZPhaseSpaceVol/TransZ             = 0.025 cm + Ge/Snout/BrassCone/LowerEdge
+#d:Ge/ZPhaseSpaceVol/TransZ             = 0.025 cm + Ge/Aperture/LowerEdge
+d:Ge/ZPhaseSpaceVol/TransZ             = 0.025 cm + Ge/Snout/BrassCone/LowerEdge
 #d:Ge/ZPhaseSpaceVol/TransZ             = 20 cm
 d:Ge/ZPhaseSpaceVol/RotX               = 0. deg
 d:Ge/ZPhaseSpaceVol/RotY               = 0. deg

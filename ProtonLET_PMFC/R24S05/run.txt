@@ -1,0 +1,22 @@
+i:Ts/NumberOfThreads = -1
+i:Ts/Seed = 667
+#b:Ge/QuitIfOverlapDetected = "F"
+#i:Ts/MaxInterruptedHistories = 100000000
+b:Ts/ShowCPUTime = "true"
+b:Ts/ShowHistoryCountOnSingleLine = "False"
+i:Ts/ShowHistoryCountAtInterval = 1000
+#b:Ts/DumpParameters = "True"
+
+#i:So/Demo/NumberOfHistoriesInRun = 500
+#iv:Tf/BeamCurrent/Values = 1 4000
+
+#s:Sc/PhaseSpaceAtVacFilm/OutputFile = "results/PhaseSpace"
+#s:Sc/PhaseSpaceAtVacFilm_binary/OutputFile  = "results/PhaseSpace_bin"
+
+#b:Gr/MyOGL/IncludeAxes = "True" # defaults to "False"
+#s:Gr/MyOGL/AxesComponent = "World" 
+#d:Gr/MyOGL/AxesSize = 10. cm # size of axes
+#s:Gr/MyOGL/Type        = "OpenGL"
+#Ts/UseQt = "True"
+
+includeFile = scorers.txt

@@ -133,16 +133,17 @@ def make_input(fs, rm, ss, bcm_opt, stoppos, beam_e, n_history, n_nodes, out_d):
 
 # 함수 호출 예시
 if __name__ == "__main__":
-    #make_input("632", # FS
-    #            "5", # RM
-    #            "3", # SS
-    #            "B6_2", # BCM option
-    #            "55", # stop position
-    #            "195.40", # Energy
-    #            "10", # nHistory
-    #            "-1", # nNodes
-    #            "output_test1",
-    #            )
+    # R24S05 
+    make_input("6254", # FS
+                "8", # RM
+                "3", # SS
+                "B8_1", # BCM option
+                "172", # stop position
+                "210.33", # Energy
+                "100", # nHistory
+                "-1", # nNodes
+                "results",
+                )
     
     #make_input("9643", # FS
     #            "6", # RM
@@ -155,13 +156,13 @@ if __name__ == "__main__":
     #            "results",
     #            )
     
-    make_input("6254", # FS
-                "5", # RM
-                "2", # SS
-                "B4_1", # BCM option
-                "164", # stop position
-                "171.79", # Energy
-                "10", # nHistory
-                "-1", # nNodes
-                "results",
-                )
+    #make_input("6254", # FS
+    #            "5", # RM
+    #            "2", # SS
+    #            "B4_1", # BCM option
+    #            "164", # stop position
+    #            "171.79", # Energy
+    #            "10", # nHistory
+    #            "-1", # nNodes
+    #            "results",
+    #            )
